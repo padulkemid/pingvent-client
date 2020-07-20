@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
-    height: 334,
+    height: 450,
   },
 }));
 
@@ -71,10 +71,10 @@ export default () => {
         <BarChart
           data={data}
           margin={{
-            top: 18,
+            top: 10,
             right: 20,
-            bottom: 15,
-            left: 24,
+            bottom: 50,
+            left: 10,
           }}>
           <CartesianGrid strokeDasharray="2 2" />
           <XAxis dataKey="day" type="number" stroke="black">
@@ -87,7 +87,7 @@ export default () => {
             </Label>
           </XAxis>
           <Tooltip />
-          <Legend verticalAlign="top" height={36} />
+          <Legend verticalAlign="top" align="right" height={40} />
           <YAxis stroke="black">
             <Label
               angle={270}

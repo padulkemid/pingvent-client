@@ -17,6 +17,7 @@
     "gatsby-plugin-sharp": "^2.1.2",
     "gatsby-source-filesystem": "^2.0.37",
     "gatsby-transformer-sharp": "^2.1.20",
+    "mui-datatables": "^3.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
