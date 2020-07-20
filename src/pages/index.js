@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Layout from '../components/layout';
-import Image from '../components/image';
 import SEO from '../components/seo';
+import Chart from '../components/chart';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -49,17 +49,10 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Home" />
-      <Grid container spacing={3} justify="center">
-        <Grid item xs={2}>
-          <div style={{ maxWidth: `100px`, marginBottom: `1.45rem` }}>
-            <Image />
-          </div>
-        </Grid>
-        <Grid item xs={8}>
-          <h1>Pingpos</h1>
-          <h5>Your minimal, back to basic Point of Sales system</h5>
-          <h5>{`<placeholder_msg>`}</h5>
+      <SEO title="Dashboard" />
+      <Grid container spacing={3}>
+        <Grid item xs>
+          <Chart />
         </Grid>
       </Grid>
       <Divider />
