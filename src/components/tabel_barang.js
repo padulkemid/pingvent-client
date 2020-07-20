@@ -114,23 +114,24 @@ const options = {
 // styles
 const useStyles = makeStyles((theme) => ({
   in: {
-    color: 'green',
+    color: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
     '& td': {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary.dark,
       color: 'white',
     },
     '& p': {
+      color: 'white',
+    },
+    '& #pagination-rows': {
       color: 'white',
     },
   },
   out: {
-    color: 'red',
+    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.main,
     '& td': {
-      backgroundColor: theme.palette.secondary.main,
-      color: 'white',
-    },
-    '& p': {
-      color: 'white',
+      backgroundColor: theme.palette.secondary.light,
     },
   },
 }));

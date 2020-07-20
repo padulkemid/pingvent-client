@@ -3,7 +3,7 @@ import React from 'react';
 // @material-ui core
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 // recharts
 import {
@@ -60,6 +60,7 @@ const data = [
 ];
 
 export default () => {
+  const theme = useTheme();
   const classes = useStyles();
 
   return (
@@ -98,8 +99,8 @@ export default () => {
               Barang
             </Label>
           </YAxis>
-          <Bar dataKey="barangMasuk" fill="green" />
-          <Bar dataKey="barangKeluar" fill="red" />
+          <Bar dataKey="barangMasuk" fill={theme.palette.primary.main} />
+          <Bar dataKey="barangKeluar" fill={theme.palette.secondary.main} />
         </BarChart>
       </ResponsiveContainer>
     </Paper>

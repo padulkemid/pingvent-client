@@ -13,14 +13,15 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import HomeIcon from '@material-ui/icons/Home';
-import ListIcon from '@material-ui/icons/ViewList';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ArchiveIcon from '@material-ui/icons/Archive';
 
 const drawerWidth = 240;
 
@@ -143,17 +144,17 @@ const Header = ({ siteTitle }) => {
           <Link to="/">
             <ListItem button>
               <ListItemIcon>
-                <HomeIcon />
+                <DashboardIcon />
               </ListItemIcon>
               <ListItemText>Dashboard</ListItemText>
             </ListItem>
           </Link>
-          <Link to="/components">
+          <Link to="/barang">
             <ListItem button>
               <ListItemIcon>
-                <ListIcon />
+                <ArchiveIcon />
               </ListItemIcon>
-              <ListItemText>Components</ListItemText>
+              <ListItemText>Barang</ListItemText>
             </ListItem>
           </Link>
         </List>

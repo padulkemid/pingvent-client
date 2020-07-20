@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   startVersion: {
     background: theme.palette.secondary.main,
+    color: '#000',
   },
 }));
 
