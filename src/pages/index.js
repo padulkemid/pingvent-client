@@ -3,7 +3,7 @@ import React from 'react';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Chart from '../components/chart';
-import TabelBarang from '../components/tabel_barang';
+import TabelBarang from '../components/summary_table';
 import BarangCard from '../components/barang_card';
 
 import Grid from '@material-ui/core/Grid';
