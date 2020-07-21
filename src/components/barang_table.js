@@ -122,7 +122,7 @@ export default () => {
 
   return (
     <>
-      <Box mb={6}>
+      <Box mb={6} mt={3}>
         <DataTable
           title={'List Barang Toko Ceunah'}
           data={data}
