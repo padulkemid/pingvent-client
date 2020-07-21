@@ -14,3 +14,15 @@ export const dateFormatToday = () => {
 
   return dateString;
 };
+
+export const formatPhoneNumber = (str) => {
+  const newPhone = str.slice(3);
+
+  return newPhone;
+};
+
+export const formatEmail = (str) => {
+  const newEmail = str.substring(0, str.indexOf('@'));
+
+  return newEmail;
+};

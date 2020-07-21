@@ -22,6 +22,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ArchiveIcon from '@material-ui/icons/Archive';
+import PeopleIcon from '@material-ui/icons/People';
 
 const drawerWidth = 240;
 
@@ -155,6 +156,14 @@ const Header = ({ siteTitle }) => {
                 <ArchiveIcon />
               </ListItemIcon>
               <ListItemText>Barang</ListItemText>
+            </ListItem>
+          </Link>
+          <Link to="/user">
+            <ListItem button>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText>User</ListItemText>
             </ListItem>
           </Link>
         </List>
