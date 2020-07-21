@@ -14,6 +14,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 // mui-datatables
 import DataTable from 'mui-datatables';
 
+// helper
+import { dateFormatToday } from '../utils/helper';
+
 export default () => {
   // dialog states
   const [deleteAlert, setDeleteAlert] = useState(false);
@@ -100,7 +103,7 @@ export default () => {
       return false;
     },
     downloadOptions: {
-      filename: `tabel_barang_${new Date().toString().slice(0, 15)}`,
+      filename: `List Barang ${dateFormatToday()}`,
     },
   };
 
