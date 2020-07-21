@@ -43,8 +43,6 @@ export default () => {
     },
     'Alamat',
     'Location',
-    'Dibuat',
-    'Diubah',
     'Login Terakhir',
     {
       name: 'Menu',
@@ -57,7 +55,7 @@ export default () => {
               color="primary"
               fullWidth
               onClick={() => handleFormOpen(tableMeta)}>
-              Edit User
+              Edit
             </Button>
           </Box>
         ),
@@ -75,8 +73,6 @@ export default () => {
       'user',
       'Jln. Ceunah',
       '-6.780, 123.08',
-      '20 Juli 2020 21:04',
-      '20 Juli 2020 21:04',
       '25 Juli 2020 10:34',
     ],
   ];

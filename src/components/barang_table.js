@@ -54,7 +54,7 @@ export default () => {
               color="primary"
               fullWidth
               onClick={() => handleFormOpen(tableMeta)}>
-              Edit Barang
+              Edit
             </Button>
           </Box>
         ),
