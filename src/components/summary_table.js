@@ -142,7 +142,7 @@ export default () => {
   return (
     <Box mb={8}>
       <Grid container spacing={4}>
-        <Grid item xs>
+        <Grid item xs={12} md={6}>
           <DataTable
             title={'Status Barang Masuk'}
             data={dataIn}
@@ -151,7 +151,7 @@ export default () => {
             options={options}
           />
         </Grid>
-        <Grid item xs>
+        <Grid item xs={12} md={6}>
           <DataTable
             title={'Status Barang Keluar'}
             data={dataOut}
