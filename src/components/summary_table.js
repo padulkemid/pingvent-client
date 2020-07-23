@@ -8,6 +8,9 @@ import { makeStyles } from '@material-ui/core/styles';
 // mui-datatables
 import DataTable from 'mui-datatables';
 
+// utils
+import { dateFormatToday } from '../utils/helper';
+
 const columns = ['ID', 'Nama', 'Harga', 'Stok', 'Vendor', 'Dibuat', 'Diubah'];
 
 const dataIn = [
@@ -108,23 +111,38 @@ const dataOut = [
 
 const options = {
   elevation: 3,
-  selectableRows: 'single',
+  onRowsDelete: ({ data }) => {
+    // TODO: delete index here
+    // use newTableData as the 2nd params
+    // to get newly refreshed data after
+    // delete
+    console.log(data);
+    return false;
+  },
+  downloadOptions: {
+    filename: `Ringkasan Status Barang ${dateFormatToday()}`,
+  },
 };
 
 // styles
 const useStyles = makeStyles((theme) => ({
   in: {
-    color: theme.palette.secondary.main,
-    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.secondary.light,
+    backgroundColor: theme.palette.primary.light,
     '& td': {
       backgroundColor: theme.palette.primary.dark,
       color: 'white',
     },
-    '& p': {
+    '& .MuiToolbar-root': {
       color: 'white',
     },
-    '& #pagination-rows': {
-      color: 'white',
+    '& .MuiSvgIcon-root': {
+      color: theme.palette.secondary.light,
+    },
+    // delete icon after selected
+    '& .MuiPaper-root': {
+      color: theme.palette.secondary.light,
+      backgroundColor: theme.palette.primary.light,
     },
   },
   out: {
@@ -132,6 +150,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
     '& td': {
       backgroundColor: theme.palette.secondary.light,
+    },
+    '& .MuiSvgIcon-root': {
+      color: theme.palette.primary.main,
     },
   },
 }));

@@ -71,7 +71,6 @@ export default ({ open, formClose, formData }) => {
       <Dialog open={open} onClose={handleFormClose} aria-labelledby="edit-form">
         <DialogTitle id="edit-form">Edit Data</DialogTitle>
         <DialogContent>
-          <DialogContentText>Kamu siapa entah siapa</DialogContentText>
           <TextField
             error={id.length ? false : true}
             margin="dense"

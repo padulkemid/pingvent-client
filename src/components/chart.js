@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     flexDirection: 'column',
     height: 450,
+    backgroundColor: theme.palette.secondary.main,
   },
 }));
 
@@ -75,7 +76,7 @@ export default () => {
             top: 10,
             right: 20,
             bottom: 50,
-            left: 10,
+            left: 15,
           }}>
           <CartesianGrid strokeDasharray="2 2" />
           <XAxis dataKey="day" type="number" stroke="black">
@@ -100,7 +101,7 @@ export default () => {
             </Label>
           </YAxis>
           <Bar dataKey="barangMasuk" fill={theme.palette.primary.main} />
-          <Bar dataKey="barangKeluar" fill={theme.palette.secondary.main} />
+          <Bar dataKey="barangKeluar" fill={theme.palette.secondary.light} />
         </BarChart>
       </ResponsiveContainer>
     </Paper>

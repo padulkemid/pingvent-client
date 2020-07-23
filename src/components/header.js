@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -98,6 +98,10 @@ const Header = ({ siteTitle }) => {
     setOpen(false);
   };
 
+  const handleLogout = () => {
+    navigate('/login');
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -170,7 +174,7 @@ const Header = ({ siteTitle }) => {
         </List>
         <Divider />
         <List>
-          <ListItem button>
+          <ListItem button onClick={handleLogout}>
             <ListItemIcon>
               <PowerSettingsNewIcon style={{ color: 'red' }} />
             </ListItemIcon>

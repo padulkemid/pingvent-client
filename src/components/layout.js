@@ -17,15 +17,15 @@ import './layout.css';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#1976d2',
-      light: '#63a4ff',
-      dark: '#004ba0',
+      main: '#000',
+      light: '#2c2c2c',
+      dark: '#000',
       contrastText: '#fff',
     },
     secondary: {
-      main: '#f9bf2d',
-      light: '#fff163',
-      dark: '#c28f00',
+      main: '#e5e5e5',
+      light: '#fff',
+      dark: '#b3b3b3',
       contrastText: '#000',
     },
   },
