@@ -23,6 +23,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import PeopleIcon from '@material-ui/icons/People';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
 const drawerWidth = 240;
 
@@ -89,13 +90,13 @@ const Header = ({ siteTitle }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  function handleDrawerOpen() {
+  const handleDrawerOpen = () => {
     setOpen(true);
-  }
+  };
 
-  function handleDrawerClose() {
+  const handleDrawerClose = () => {
     setOpen(false);
-  }
+  };
 
   return (
     <div className={classes.root}>
@@ -166,6 +167,15 @@ const Header = ({ siteTitle }) => {
               <ListItemText>Member</ListItemText>
             </ListItem>
           </Link>
+        </List>
+        <Divider />
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <PowerSettingsNewIcon style={{ color: 'red' }} />
+            </ListItemIcon>
+            <ListItemText>Logout</ListItemText>
+          </ListItem>
         </List>
       </Drawer>
     </div>

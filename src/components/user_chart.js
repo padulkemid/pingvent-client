@@ -29,10 +29,11 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     flexDirection: 'column',
     height: 450,
+    color: theme.palette.primary.main,
   },
   user: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
+    color: theme.palette.secondary.main,
   },
 }));
 
