@@ -7,10 +7,10 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 // recharts
 import {
-  BarChart,
+  AreaChart,
   XAxis,
   YAxis,
-  Bar,
+  Area,
   Tooltip,
   Legend,
   Label,
@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     flexDirection: 'column',
     height: 450,
-    backgroundColor: theme.palette.secondary.main,
   },
 }));
 
@@ -70,7 +69,7 @@ export default () => {
         Perkembangan Barang Masuk dan Keluar
       </Typography>
       <ResponsiveContainer>
-        <BarChart
+        <AreaChart
           data={data}
           margin={{
             top: 10,
@@ -78,6 +77,32 @@ export default () => {
             bottom: 50,
             left: 15,
           }}>
+          <defs>
+            <linearGradient id="barangMasuk" x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset="5%"
+                stopColor={theme.palette.primary.main}
+                stopOpacity={0.8}
+              />
+              <stop
+                offset="95%"
+                stopColor={theme.palette.primary.light}
+                stopOpacity={0}
+              />
+            </linearGradient>
+            <linearGradient id="barangKeluar" x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset="5%"
+                stopColor={theme.palette.secondary.main}
+                stopOpacity={0.8}
+              />
+              <stop
+                offset="70%"
+                stopColor={theme.palette.secondary.dark}
+                stopOpacity={0}
+              />
+            </linearGradient>
+          </defs>
           <CartesianGrid strokeDasharray="2 2" />
           <XAxis dataKey="day" type="number" stroke="black">
             <Label
@@ -100,9 +125,21 @@ export default () => {
               Barang
             </Label>
           </YAxis>
-          <Bar dataKey="barangMasuk" fill={theme.palette.primary.main} />
-          <Bar dataKey="barangKeluar" fill={theme.palette.secondary.light} />
-        </BarChart>
+          <Area
+            type="monotone"
+            dataKey="barangMasuk"
+            stroke={theme.palette.primary.main}
+            fillOpacity={1}
+            fill="url(#barangMasuk)"
+          />
+          <Area
+            type="monotone"
+            dataKey="barangKeluar"
+            stroke={theme.palette.secondary.dark}
+            fillOpacity={1}
+            fill="url(#barangKeluar)"
+          />
+        </AreaChart>
       </ResponsiveContainer>
     </Paper>
   );
