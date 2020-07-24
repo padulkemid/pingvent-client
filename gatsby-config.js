@@ -28,6 +28,27 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: `Pingpos`,
+        fieldName: `pingpos`,
+        // localhost for dev, production mode later
+        url: `http://localhost:4000/query`,
+        headers: () => {
+          const token = localStorage.getItem('token');
+          const auth = {};
+
+          if (token) {
+            auth = {
+              Authorization: `Bearer ${token}`,
+            };
+          }
+
+          return auth;
+        },
+      },
+    },
+    {
       resolve: `gatsby-plugin-material-ui`,
       // If you want to use styled components, in conjunction to Material-UI, you should:
       // - Change the injection order
