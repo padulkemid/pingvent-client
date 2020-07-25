@@ -11,7 +11,21 @@ import DataTable from 'mui-datatables';
 // utils
 import { dateFormatToday } from '../utils/helper';
 
-const columns = ['ID', 'Nama', 'Harga', 'Stok', 'Vendor', 'Dibuat', 'Diubah'];
+const columns = [
+  {
+    name: 'ID',
+    options: {
+      filter: true,
+      display: 'false',
+    },
+  },
+  'Nama',
+  'Harga',
+  'Stok',
+  'Vendor',
+  'Dibuat',
+  'Diubah',
+];
 
 const dataIn = [
   [
@@ -28,7 +42,7 @@ const dataIn = [
     'Cooler Master MasterWatt 550W PSU 80+',
     'Rp 1.230.000,00',
     8,
-    'Toko Jancuk',
+    'Toko Rubi',
     '29 Mei 2020 17:30',
     '1 Juli 2020 12:45',
   ],
@@ -76,7 +90,7 @@ const dataOut = [
     'Cooler Master MasterWatt 550W PSU 80+',
     'Rp 1.230.000,00',
     8,
-    'Toko Jancuk',
+    'Toko Rubi',
     '29 Mei 2020 17:30',
     '1 Juli 2020 12:45',
   ],
@@ -185,4 +199,3 @@ export default () => {
     </Box>
   );
 };
-

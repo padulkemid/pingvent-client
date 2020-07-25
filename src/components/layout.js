@@ -14,6 +14,9 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Header from './header';
 import './layout.css';
 
+import { ApolloProvider } from '@apollo/react-hooks';
+import client from '../services/graphql';
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -54,7 +57,9 @@ const Layout = ({ children }) => {
                 padding: `0px 1.0875rem 1.45rem`,
                 paddingTop: 100,
               }}>
-              <main>{children}</main>
+              <ApolloProvider client={client}>
+                <main>{children}</main>
+              </ApolloProvider>
               <footer style={{ paddingTop: 10, textAlign: 'center' }}>
                 © {new Date().getFullYear()}, Proudly served by{` `}
                 <a

@@ -1,3 +1,6 @@
+import React from 'react';
+import MuiAlert from '@material-ui/lab/Alert';
+
 export const dateFormatToday = () => {
   const dateOptions = {
     weekday: 'long',
@@ -25,4 +28,8 @@ export const formatEmail = (str) => {
   const newEmail = str.substring(0, str.indexOf('@'));
 
   return newEmail;
+};
+
+export const Alert = (props) => {
+  return <MuiAlert elevation={10} variant="filled" {...props} />;
 };

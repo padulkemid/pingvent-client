@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Link, navigate } from 'gatsby';
+import { Link, navigate, useStaticQuery, graphql } from 'gatsby';
+import Img from 'gatsby-image';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -26,6 +27,18 @@ import PeopleIcon from '@material-ui/icons/People';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
 const drawerWidth = 240;
+
+const query = graphql`
+  query logoImg {
+    file(relativePath: { eq: "gatsby-icon.png" }) {
+      childImageSharp {
+        fixed(width: 50) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+  }
+`;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,9 +95,18 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  pingposInfo: {
+    margin: theme.spacing(5),
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
 }));
 
 const Header = ({ siteTitle }) => {
+  const data = useStaticQuery(query);
   const classes = useStyles();
 
   const theme = useTheme();
@@ -99,6 +121,7 @@ const Header = ({ siteTitle }) => {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('token');
     navigate('/login');
   };
 
@@ -180,6 +203,14 @@ const Header = ({ siteTitle }) => {
             </ListItemIcon>
             <ListItemText>Logout</ListItemText>
           </ListItem>
+        </List>
+        <Divider />
+        <List className={classes.pingposInfo}>
+          <Img fixed={data.file.childImageSharp.fixed} alt="Pingpos Logo" />
+          <br />
+          <Typography variant="overline" color="inherit">
+            Pingpos v1.0
+          </Typography>
         </List>
       </Drawer>
     </div>

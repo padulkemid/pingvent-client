@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import BarangEdit from '../components/barang_edit_form';
 
@@ -17,16 +17,32 @@ import DataTable from 'mui-datatables';
 // helper
 import { dateFormatToday } from '../utils/helper';
 
+// @apollo/react-hooks
+import { useQuery } from '@apollo/react-hooks';
+import { LIST_BARANG } from '../services/schema';
+
 export default () => {
+  // get data
+  const { data: listBarang } = useQuery(LIST_BARANG);
+  const [data, setData] = useState([]);
+
   // dialog states
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
+
   // useEffect inside props
   // TODO: refactor this T_T
+  // TODO: menangis
   const [formData, setFormData] = useState(['', '', 0, 0, '']);
 
   const columns = [
-    'ID',
+    {
+      name: 'ID',
+      options: {
+        filter: true,
+        display: 'false',
+      },
+    },
     'Nama',
     {
       name: 'Harga',
@@ -62,36 +78,6 @@ export default () => {
     },
   ];
 
-  const data = [
-    [
-      'a123098-12387-aksd719',
-      'WDC SATA III Blue 1 TB',
-      2000000,
-      10,
-      'Toko Jadah',
-      '12 Juli 2020 03:12',
-      '15 Juli 2020 10:43',
-    ],
-    [
-      'a123098-12387-aksd719',
-      'WDC SATA II Blue 2 TB',
-      600000,
-      10,
-      'Toko Jadah',
-      '12 Juli 2020 03:12',
-      '15 Juli 2020 10:43',
-    ],
-    [
-      'a123098-12387-aksd719',
-      'WDC SATA I Blue 5 TB',
-      700000,
-      10,
-      'Toko Jadah',
-      '12 Juli 2020 03:12',
-      '15 Juli 2020 10:43',
-    ],
-  ];
-
   const options = {
     elevation: 4,
     onRowsDelete: ({ data }) => {
@@ -122,6 +108,23 @@ export default () => {
     setFormOpen(true);
     setFormData(rowData);
   };
+
+  useEffect(() => {
+    if (listBarang) {
+      const { semuaBarang } = listBarang;
+      const data = semuaBarang.map((el) => [
+        el.id,
+        el.nama,
+        el.harga,
+        el.stock,
+        el.vendor,
+        el.createdAt,
+        el.updatedAt,
+      ]);
+
+      setData(data);
+    }
+  }, [listBarang]);
 
   return (
     <>
