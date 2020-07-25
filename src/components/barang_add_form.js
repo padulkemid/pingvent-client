@@ -211,7 +211,9 @@ export default () => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Data akan masuk ke dalam database untuk ditampilkan kepada pembeli.
+            Sebelumnya cek terlebih dahulu data pada tabel di bawah, apakah
+            barang ini baru atau terdapat tipe yang sama. Data akan masuk ke
+            dalam database untuk ditampilkan kepada pembeli.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

@@ -68,7 +68,13 @@ export default ({ open, formClose, formData }) => {
         setSuccess(true);
       }, 2000);
     } catch (e) {
-      console.log(e);
+      setTimeout(() => {
+        setLoading(false);
+        setSubmitAlert(false);
+        setAlertTitle('Tahan bos!');
+        setAlertContent('Nama barang sudah ada, silahkan ganti yang lain.');
+        setFalseData(true);
+      }, 2000);
     }
   };
 
