@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 // @material-ui core
 import Typography from '@material-ui/core/Typography';
@@ -7,6 +7,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // clsx
 import clsx from 'clsx';
+
+// @apollo/react-hooks
+import { useQuery } from '@apollo/react-hooks';
+import { LIST_BARANG } from '../services/schema';
+
+// utils
+import { dateFormatToday } from '../utils/helper';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -30,6 +37,17 @@ const useStyles = makeStyles((theme) => ({
 export default ({ type }) => {
   const classes = useStyles();
 
+  // barang state
+  const { data } = useQuery(LIST_BARANG);
+  const [jmlBarang, setJmlBarang] = useState(0);
+
+  useEffect(() => {
+    if (data) {
+      const { semuaBarang } = data;
+      setJmlBarang(semuaBarang.length);
+    }
+  }, [data]);
+
   return (
     <Paper
       className={
@@ -46,10 +64,10 @@ export default ({ type }) => {
         color="inherit"
         gutterBottom
         noWrap>
-        {type === 'status' ? 'Verified' : '2500 Barang'}
+        {type === 'status' ? 'Verified' : `${jmlBarang} Barang`}
       </Typography>
       <Typography variant="overline" className={classes.dateContext}>
-        diubah pada 29 Juli 2020
+        diubah pada {dateFormatToday().slice(0, 19)}
       </Typography>
     </Paper>
   );
