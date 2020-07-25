@@ -115,7 +115,7 @@ export default () => {
   const deleteBarang = async () => {
     try {
       for (let i = 0; i < deleteIds.length; i++) {
-        const result = await hapusBarang({
+        await hapusBarang({
           variables: {
             id: deleteIds[i],
           },

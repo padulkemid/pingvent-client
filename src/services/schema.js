@@ -27,6 +27,20 @@ export const BUAT_BARANG = gql`
   }
 `;
 
+export const EDIT_BARANG = gql`
+  mutation($id: ID!, $input: BarangBaru!) {
+    editBarang(id: $id, input: $input) {
+      id
+      nama
+      harga
+      stock
+      vendor
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const HAPUS_BARANG = gql`
   mutation($id: ID!) {
     hapusBarang(id: $id)
