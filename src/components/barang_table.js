@@ -108,7 +108,7 @@ export default () => {
       return false;
     },
     downloadOptions: {
-      filename: `List Barang ${dateFormatToday()}`,
+      filename: `List Barang ${dateFormatToday()}.csv`,
     },
   };
 

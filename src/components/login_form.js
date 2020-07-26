@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-import { navigate } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 
+import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
@@ -174,6 +175,18 @@ export default () => {
           Username / Password salah!
         </Alert>
       </Snackbar>
+      <Grid container>
+        <Grid item xs>
+          <Link href="#" variant="body2">
+            Lupa Password ?
+          </Link>
+        </Grid>
+        <Grid item>
+          <Link href="#" variant="body2">
+            Tidak punya akun ? Daftar !
+          </Link>
+        </Grid>
+      </Grid>
     </form>
   );
 };

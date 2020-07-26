@@ -21,7 +21,8 @@ export default () => {
   // dialog states
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
-  // useEffect inside props
+
+  // mau nangis liatnya
   // TODO: refactor this T_T
   const [formData, setFormData] = useState(['', '', '', '', '', '', '', '']);
 
@@ -121,7 +122,7 @@ export default () => {
       return false;
     },
     downloadOptions: {
-      filename: `List User ${dateFormatToday()}`,
+      filename: `List User ${dateFormatToday()}.csv`,
     },
   };
 

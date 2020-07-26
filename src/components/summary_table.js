@@ -134,7 +134,7 @@ const options = {
     return false;
   },
   downloadOptions: {
-    filename: `Ringkasan Status Barang ${dateFormatToday()}`,
+    filename: `Ringkasan Status Barang ${dateFormatToday()}.csv`,
   },
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
@@ -13,7 +13,7 @@ import {
   makeStyles,
 } from '@material-ui/core/styles';
 
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, navigate } from 'gatsby';
 import Img from 'gatsby-image';
 import SEO from '../components/seo';
 import LoginForm from '../components/login_form';
@@ -107,6 +107,13 @@ export default () => {
   const data = useStaticQuery(query);
   const classes = useStyles();
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/');
+    }
+  }, []);
+
   return (
     <MuiThemeProvider theme={newTheme}>
       <SEO title="Login" />
@@ -138,18 +145,6 @@ export default () => {
               <LoginForm />
             </ApolloProvider>
           </div>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Lupa Password ?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                Tidak punya akun ? Daftar !
-              </Link>
-            </Grid>
-          </Grid>
           <Box mt={5}>
             <Copyright />
           </Box>
