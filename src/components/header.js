@@ -29,10 +29,17 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 const drawerWidth = 240;
 
 const query = graphql`
-  query logoImg {
-    file(relativePath: { eq: "gatsby-icon.png" }) {
+  query logoImgAndGithubIcon {
+    logoImg: file(relativePath: { eq: "gatsby-icon.png" }) {
       childImageSharp {
         fixed(width: 50) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    ghImg: file(relativePath: { eq: "github-logo.png" }) {
+      childImageSharp {
+        fixed(width: 28) {
           ...GatsbyImageSharpFixed
         }
       }
@@ -205,8 +212,22 @@ const Header = ({ siteTitle }) => {
           </ListItem>
         </List>
         <Divider />
+        <List>
+          <Link to="https://github.com/padulkemid/pingpos" target="_blank">
+            <ListItem button>
+              <ListItemIcon>
+                <Img
+                  fixed={data.ghImg.childImageSharp.fixed}
+                  alt="Github Logo"
+                />
+              </ListItemIcon>
+              <ListItemText>Source Code</ListItemText>
+            </ListItem>
+          </Link>
+        </List>
+        <Divider />
         <List className={classes.pingposInfo}>
-          <Img fixed={data.file.childImageSharp.fixed} alt="Pingpos Logo" />
+          <Img fixed={data.logoImg.childImageSharp.fixed} alt="Pingpos Logo" />
           <br />
           <Typography variant="overline" color="inherit">
             Pingpos v1.0

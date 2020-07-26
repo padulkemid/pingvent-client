@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   user: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.secondary.main,
+    color: theme.palette.secondary.dark,
   },
 }));
 
@@ -121,7 +121,7 @@ export default ({ type }) => {
             dataKey={type === 'user' ? 'user' : 'seller'}
             stroke={
               type === 'user'
-                ? theme.palette.secondary.main
+                ? theme.palette.secondary.dark
                 : theme.palette.primary.main
             }
             fill={

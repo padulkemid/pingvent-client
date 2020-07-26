@@ -27,7 +27,13 @@ export default () => {
   const [formData, setFormData] = useState(['', '', '', '', '', '', '', '']);
 
   const columns = [
-    'ID',
+    {
+      name: 'ID',
+      options: {
+        filter: true,
+        display: 'false',
+      },
+    },
     'Username',
     'Nama',
     'Email',
@@ -48,6 +54,8 @@ export default () => {
     {
       name: 'Menu',
       options: {
+        download: false,
+        print: false,
         filter: false,
         customBodyRender: (value, tableMeta, updateValue) => (
           <Box m={2}>
@@ -113,6 +121,7 @@ export default () => {
 
   const options = {
     elevation: 4,
+    responsive: 'standard',
     onRowsDelete: ({ data }) => {
       // TODO: delete index here
       // use newTableData as the 2nd params
@@ -182,4 +191,3 @@ export default () => {
     </>
   );
 };
-

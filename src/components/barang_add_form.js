@@ -180,10 +180,10 @@ export default () => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Nama Toko"
+              label="Nama Penjual"
               margin="dense"
               variant="outlined"
-              helperText="Atas nama toko untuk barang ini."
+              helperText="Atas nama penjual untuk barang ini."
               value={vendor}
               onChange={(e) => setVendor(e.target.value)}
               fullWidth

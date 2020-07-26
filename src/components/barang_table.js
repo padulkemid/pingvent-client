@@ -76,13 +76,15 @@ export default () => {
       },
     },
     'Stok',
-    'Vendor',
+    'Seller',
     'Dibuat',
     'Diubah',
     {
       name: 'Menu',
       options: {
         filter: false,
+        download: false,
+        print: false,
         customBodyRender: (value, tableMeta, updateValue) => (
           <Box m={2}>
             <Button
@@ -100,6 +102,7 @@ export default () => {
 
   const options = {
     elevation: 4,
+    responsive: 'standard',
     onRowsDelete: ({ data }) => {
       handleAlertOpen(data);
 
@@ -190,7 +193,7 @@ export default () => {
     <>
       <Box mb={6} mt={3}>
         <DataTable
-          title={'List Barang Toko Ceunah'}
+          title={'List Barang'}
           data={data}
           columns={columns}
           options={options}

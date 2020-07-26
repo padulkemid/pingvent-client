@@ -125,6 +125,7 @@ const dataOut = [
 
 const options = {
   elevation: 3,
+  responsive: 'standard',
   onRowsDelete: ({ data }) => {
     // TODO: delete index here
     // use newTableData as the 2nd params
