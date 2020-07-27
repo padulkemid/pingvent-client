@@ -5,6 +5,7 @@ import UserEdit from '../components/user_edit_form';
 // @material-ui core
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -15,8 +16,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DataTable from 'mui-datatables';
 
 // @apollo/react-hooks
-import { useQuery } from '@apollo/react-hooks';
-import { LIST_USER } from '../services/schema';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { LIST_USER, DELETE_USER } from '../services/schema';
 
 // helper
 import { dateFormatToday } from '../utils/helper';
@@ -25,6 +26,7 @@ export default () => {
   // user queries
   const { data: listUser } = useQuery(LIST_USER);
   const [data, setData] = useState([]);
+  const [deleteIds, setDeleteIds] = useState([]);
 
   // dialog states
   const [deleteAlert, setDeleteAlert] = useState(false);
@@ -33,6 +35,10 @@ export default () => {
   // mau nangis liatnya
   // TODO: refactor this T_T
   const [formData, setFormData] = useState(['', '', '', '', '', '', '', '']);
+
+  // delete states
+  const [hapusOrang] = useMutation(DELETE_USER);
+  const [loading, setLoading] = useState(false);
 
   const columns = [
     {
@@ -84,12 +90,12 @@ export default () => {
   const options = {
     elevation: 4,
     responsive: 'standard',
+
+    // disable user print and export to csv
+    download: false,
+    print: false,
     onRowsDelete: ({ data }) => {
-      // TODO: delete index here
-      // use newTableData as the 2nd params
-      // to get newly refreshed data after
-      // delete
-      handleDelete(data);
+      handleAlertOpen(data);
       return false;
     },
     downloadOptions: {
@@ -97,8 +103,40 @@ export default () => {
     },
   };
 
-  const handleDelete = (data) => {
-    console.log(data);
+  const deleteOrang = async () => {
+    try {
+      for (let i = 0; i < deleteIds.length; i++) {
+        await hapusOrang({
+          variables: {
+            id: deleteIds[i],
+          },
+        });
+
+        setTimeout(() => {
+          setLoading(false);
+          setDeleteAlert(false);
+          window.location.reload();
+        }, 2000);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleDelete = () => {
+    setLoading(true);
+    deleteOrang();
+  };
+
+  const handleAlertOpen = (dataIndex) => {
+    // first map: get new array based on dataindexes
+    const idx = dataIndex.map((el) => el.dataIndex);
+
+    // second map: get new array based on data array
+    // with indexes from above
+    const dataWithIdx = idx.map((el) => data[el][0]);
+
+    setDeleteIds(dataWithIdx);
     setDeleteAlert(true);
   };
 
@@ -107,8 +145,6 @@ export default () => {
   };
 
   const handleFormOpen = ({ rowData }) => {
-    // meta carries data index
-    // TODO: insert data change here
     setFormOpen(true);
     setFormData(rowData);
   };
@@ -168,10 +204,17 @@ export default () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleAlertClose} style={{ color: 'red' }}>
-            Tutup
-          </Button>
-          <Button onClick={handleAlertClose} color="primary">
+          {loading ? (
+            <CircularProgress size={19} style={{ marginRight: '1%' }} />
+          ) : (
+            <Button onClick={handleAlertClose} style={{ color: 'red' }}>
+              Tutup
+            </Button>
+          )}
+          <Button
+            disabled={loading ? true : false}
+            onClick={handleDelete}
+            color="primary">
             Hapus
           </Button>
         </DialogActions>

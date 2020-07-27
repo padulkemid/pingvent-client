@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -18,6 +19,10 @@ import StepLabel from '@material-ui/core/StepLabel';
 
 // @material-ui icons
 import RoomIcon from '@material-ui/icons/Room';
+
+// @apollo/react-hooks
+import { useMutation } from '@apollo/react-hooks';
+import { EDIT_USER } from '../services/schema';
 
 // helper
 import { formatPhoneNumber, formatEmail } from '../utils/helper';
@@ -45,12 +50,57 @@ export default ({ open, formClose, formData }) => {
   const [address, setAddress] = useState('');
   const [latlng, setLatlng] = useState('');
 
+  // edit states
+  const [ubahUser] = useMutation(EDIT_USER);
+
+  // alert states
+  const [falseData, setFalseData] = useState(false);
+  const [falseTitle, setFalseTitle] = useState('');
+  const [falseContent, setFalseContent] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const editDataUser = async () => {
+    try {
+      const newEmail = `${email}@gmail.com`;
+      const newPhone = `+62${phone}`;
+      await ubahUser({
+        variables: {
+          id,
+          input: {
+            username,
+            nama,
+            email: newEmail,
+            phone: newPhone,
+            address,
+            latlng,
+          },
+        },
+      });
+
+      setTimeout(() => {
+        setLoading(false);
+        setSubmitAlert(false);
+        formClose(false);
+      }, 2000);
+    } catch (e) {
+      console.log(e);
+      setTimeout(() => {
+        setLoading(false);
+        setSubmitAlert(false);
+        setFalseTitle('Sistem ada error!');
+        setFalseContent('Sistem mengalami gangguan, coba beberapa saat lagi!');
+        setFalseData(true);
+      }, 2000);
+    }
+  };
+
   const handleFormClose = () => {
     formClose(false);
   };
 
   const handleAlertClose = () => {
     setSubmitAlert(false);
+    setFalseData(false);
   };
 
   const handleAlertOpen = () => {
@@ -58,9 +108,77 @@ export default ({ open, formClose, formData }) => {
   };
 
   const handleSubmit = () => {
-    formClose(false);
-    setSubmitAlert(false);
+    setLoading(true);
     setActiveStep(0);
+
+    // add new stuff
+    const newPhone = `+62${phone}`;
+    const newEmail = `${email}@gmail.com`;
+
+    if (
+      !username.length ||
+      !nama.length ||
+      !email.length ||
+      !phone.length ||
+      !address.length
+    ) {
+      setFalseTitle('Bagan masi ada yg kosong!');
+      setFalseContent(
+        'Brok cek lagi bagan anda masi ada yang kosong, coba liat...'
+      );
+      setFalseData(true);
+      setLoading(false);
+      return;
+    } else if (!latlng.length) {
+      setLatlng('Belum ada koordinat.');
+    }
+
+    // validation check
+    const phoneRegex = /^((?:\+62|62)|0)[2-9]{1}[0-9]+$/;
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    // email test
+    const emailTestBefore = emailRegex.test(email);
+
+    if (!emailTestBefore) {
+      const emailTestAfter = emailRegex.test(newEmail);
+
+      if (!emailTestAfter) {
+        setFalseTitle('Cek email anda!');
+        setFalseContent('Format email anda salah!');
+        setFalseData(true);
+        setLoading(false);
+        return;
+      }
+    } else {
+      setFalseTitle('Cek email anda!');
+      setFalseContent('Format email anda salah!');
+      setFalseData(true);
+      setLoading(false);
+      return;
+    }
+
+    // phone test
+    if (phone.length >= 9 && phone.length <= 12) {
+      const testPhone = phoneRegex.test(newPhone);
+
+      if (!testPhone) {
+        setFalseTitle('Nomor Handphone !');
+        setFalseContent('Format nomer handphone anda salah!');
+        setFalseData(true);
+        setLoading(false);
+        return;
+      }
+    } else {
+      setFalseTitle('Nomor Handphone !');
+      setFalseContent('Format nomer handphone anda salah!');
+      setFalseData(true);
+      setLoading(false);
+      return;
+    }
+
+    formClose(false);
+    editDataUser();
   };
 
   // stepper funcs
@@ -202,11 +320,32 @@ export default ({ open, formClose, formData }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleAlertClose} style={{ color: 'red' }}>
-            Tutup
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
+          {loading ? (
+            <CircularProgress size={19} style={{ marginRight: '1%' }} />
+          ) : (
+            <Button onClick={handleAlertClose} style={{ color: 'red' }}>
+              Tutup
+            </Button>
+          )}
+          <Button
+            disabled={loading ? true : false}
+            onClick={handleSubmit}
+            color="primary">
             Ubah
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={falseData}
+        onClose={handleAlertClose}
+        aria-labelledby="alert">
+        <DialogTitle id="alert">{falseTitle}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>{falseContent}</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleAlertClose} style={{ color: 'red' }}>
+            Kembali
           </Button>
         </DialogActions>
       </Dialog>
@@ -246,4 +385,3 @@ export default ({ open, formClose, formData }) => {
     </>
   );
 };
-

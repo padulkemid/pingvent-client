@@ -132,7 +132,7 @@ export default ({ open, formClose }) => {
       setFalseData(true);
       return;
     } else if (!latlng.length) {
-      setLatlng('0.0');
+      setLatlng('Belum ada koordinat');
     }
 
     // regexes
@@ -161,7 +161,7 @@ export default ({ open, formClose }) => {
     }
 
     // phone test
-    if (phone.length >= 9 || phone.length <= 12) {
+    if (phone.length >= 9 && phone.length <= 12) {
       const testPhone = phoneRegex.test(newPhone);
 
       if (!testPhone) {

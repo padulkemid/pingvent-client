@@ -166,8 +166,6 @@ export default () => {
   };
 
   const handleFormOpen = ({ rowData }) => {
-    // meta carries data index
-    // TODO: insert data change here
     setFormOpen(true);
     setFormData(rowData);
   };

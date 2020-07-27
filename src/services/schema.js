@@ -15,6 +15,37 @@ export const REFRESH_TOKEN = gql`
   }
 `;
 
+export const EDIT_USER = gql`
+  mutation($id: ID!, $input: EditUser!) {
+    editUser(id: $id, input: $input) {
+      id
+      username
+      nama
+      role
+      email
+      phone
+      address
+      latlng
+      updatedAt
+    }
+  }
+`;
+
+export const DELETE_USER = gql`
+  mutation($id: ID!) {
+    hapusUser(id: $id)
+  }
+`;
+
+export const PARSE_TOKEN = gql`
+  query {
+    parseTokenData {
+      username
+      role
+    }
+  }
+`;
+
 // BARANG
 export const BUAT_BARANG = gql`
   mutation($input: BarangBaru!) {
