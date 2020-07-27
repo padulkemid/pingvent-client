@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-boost';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/query',
+  uri: 'https://tranquil-atoll-83602.herokuapp.com/query',
   request: (opr) => {
     const token = localStorage.getItem('token');
     opr.setContext({
