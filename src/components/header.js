@@ -213,7 +213,10 @@ const Header = ({ siteTitle }) => {
         </List>
         <Divider />
         <List>
-          <Link to="https://github.com/padulkemid/pingpos" target="_blank">
+          <a
+            href="https://github.com/padulkemid/pingpos"
+            target="_blank"
+            rel="noopener noreferrer">
             <ListItem button>
               <ListItemIcon>
                 <Img
@@ -223,7 +226,7 @@ const Header = ({ siteTitle }) => {
               </ListItemIcon>
               <ListItemText>Source Code</ListItemText>
             </ListItem>
-          </Link>
+          </a>
         </List>
         <Divider />
         <List className={classes.pingposInfo}>

@@ -289,6 +289,8 @@ export default ({ open, formClose }) => {
               helperText="Harus lebih dari 9 karakter atau kurang dari 12 karakter, dan jangan gunakan 0 di depan."
               fullWidth
             />
+
+            {/* bakal diganti nanti */}
             <TextField
               margin="dense"
               label="Role"
@@ -298,8 +300,9 @@ export default ({ open, formClose }) => {
               fullWidth
               select
               helperText="Role internal / penjual toko.">
-              <MenuItem value="seller">Seller</MenuItem>
               <MenuItem value="admin">Admin</MenuItem>
+              <MenuItem value="seller">Seller</MenuItem>
+              <MenuItem value="user">User</MenuItem>
             </TextField>
           </>
         );

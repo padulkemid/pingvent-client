@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import UserEdit from '../components/user_edit_form';
 
@@ -14,10 +14,18 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 // mui-datatables
 import DataTable from 'mui-datatables';
 
+// @apollo/react-hooks
+import { useQuery } from '@apollo/react-hooks';
+import { LIST_USER } from '../services/schema';
+
 // helper
 import { dateFormatToday } from '../utils/helper';
 
 export default () => {
+  // user queries
+  const { data: listUser } = useQuery(LIST_USER);
+  const [data, setData] = useState([]);
+
   // dialog states
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
@@ -50,6 +58,7 @@ export default () => {
     },
     'Alamat',
     'Location',
+    'Diubah',
     'Login Terakhir',
     {
       name: 'Menu',
@@ -70,53 +79,6 @@ export default () => {
         ),
       },
     },
-  ];
-
-  const data = [
-    [
-      'a3ecf919-c2a7-46e0-be6e-f11ef5d49ae7',
-      'titit',
-      'Titit Kadal',
-      'titit@gmail.com',
-      '+6285188760989',
-      'user',
-      'Jln. Ceunah',
-      '-6.780, 123.08',
-      '25 Juli 2020 10:34',
-    ],
-    [
-      'a3ecf919-c2a7-46e0-be6e-f11ef5d49ae7',
-      'peler',
-      'Peler Kadal',
-      'peler@gmail.com',
-      '+6285188760989',
-      'user',
-      'Jln. Ceunah',
-      '-6.780, 123.08',
-      '25 Juli 2020 10:34',
-    ],
-    [
-      'a3ecf919-c2a7-46e0-be6e-f11ef5d49ae7',
-      'jadah',
-      'Jadah Kadal',
-      'jadah@gmail.com',
-      '+6285188760989',
-      'user',
-      'Jln. Ceunah',
-      '-6.780, 123.08',
-      '25 Juli 2020 10:34',
-    ],
-    [
-      'a3ecf919-c2a7-46e0-be6e-f11ef5d49ae7',
-      'icun',
-      'Icun Kadal',
-      'icun@gmail.com',
-      '+6285188760989',
-      'user',
-      'Jln. Ceunah',
-      '-6.780, 123.08',
-      '25 Juli 2020 10:34',
-    ],
   ];
 
   const options = {
@@ -150,6 +112,37 @@ export default () => {
     setFormOpen(true);
     setFormData(rowData);
   };
+
+  useEffect(() => {
+    if (listUser) {
+      const { semuaUser } = listUser;
+
+      // filter shit (not an admin then fuck off)
+      const tempData = [];
+      for (let i = 0; i < semuaUser.length; i++) {
+        if (semuaUser[i].role === 'admin') {
+          continue;
+        } else {
+          tempData.push(semuaUser[i]);
+        }
+      }
+
+      const data = tempData.map((el) => [
+        el.id,
+        el.username,
+        el.nama,
+        el.email,
+        el.phone,
+        el.role,
+        el.address,
+        el.latlng,
+        el.updatedAt,
+        el.lastLoginAt,
+      ]);
+
+      setData(data);
+    }
+  }, [listUser]);
 
   return (
     <>

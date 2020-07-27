@@ -1,6 +1,8 @@
 import gql from 'graphql-tag';
 
 // mutations
+
+// USER
 export const LOGIN = gql`
   mutation($input: LoginUser!) {
     loginUser(input: $input)
@@ -13,6 +15,7 @@ export const REFRESH_TOKEN = gql`
   }
 `;
 
+// BARANG
 export const BUAT_BARANG = gql`
   mutation($input: BarangBaru!) {
     buatBarang(input: $input) {
@@ -48,6 +51,27 @@ export const HAPUS_BARANG = gql`
 `;
 
 // queries
+
+// USER
+export const LIST_USER = gql`
+  query {
+    semuaUser {
+      id
+      username
+      nama
+      role
+      email
+      phone
+      address
+      latlng
+      createdAt
+      updatedAt
+      lastLoginAt
+    }
+  }
+`;
+
+// BARANG
 export const LIST_BARANG = gql`
   query {
     semuaBarang {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -11,21 +11,33 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 
-export default () => (
-  <Layout>
-    <SEO title="Toko Ceunah" />
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={7} lg={8}>
-        <AddForm />
+import { navigate } from 'gatsby';
+
+export default () => {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      navigate('/login');
+    }
+  }, []);
+
+  return (
+    <Layout>
+      <SEO title="Toko Ceunah" />
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={7} lg={8}>
+          <AddForm />
+        </Grid>
+        <Grid item xs={12} sm={5} lg={4}>
+          <StokCard />
+          <Box mt={5.5}>
+            <LastUpdatedCard />
+          </Box>
+        </Grid>
       </Grid>
-      <Grid item xs={12} sm={5} lg={4}>
-        <StokCard />
-        <Box mt={5.5}>
-          <LastUpdatedCard />
-        </Box>
-      </Grid>
-    </Grid>
-    <Divider />
-    <BarangTable />
-  </Layout>
-);
+      <Divider />
+      <BarangTable />
+    </Layout>
+  );
+};

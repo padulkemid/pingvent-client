@@ -5,7 +5,6 @@ import { navigate } from 'gatsby';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import Chart from '../components/chart';
-import TabelBarang from '../components/summary_table';
 import BarangCard from '../components/barang_card';
 
 import Grid from '@material-ui/core/Grid';
@@ -13,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 const IndexPage = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
+
     if (!token) {
       navigate('/login');
     }
@@ -32,7 +32,6 @@ const IndexPage = () => {
           <Chart />
         </Grid>
       </Grid>
-      <TabelBarang />
     </Layout>
   );
 };
