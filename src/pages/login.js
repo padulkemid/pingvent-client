@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { useStaticQuery, graphql, navigate } from 'gatsby';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
@@ -13,7 +15,6 @@ import {
   makeStyles,
 } from '@material-ui/core/styles';
 
-import { useStaticQuery, graphql, navigate } from 'gatsby';
 import Img from 'gatsby-image';
 import SEO from '../components/seo';
 import LoginForm from '../components/login_form';

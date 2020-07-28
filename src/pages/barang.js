@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { navigate } from 'gatsby';
+
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import BarangTable from '../components/barang_table';
@@ -10,8 +12,6 @@ import AddForm from '../components/barang_add_form';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
-
-import { navigate } from 'gatsby';
 
 export default () => {
   useEffect(() => {
