@@ -392,7 +392,7 @@ export default ({ open, formClose }) => {
         </DialogActions>
       </Dialog>
       <Dialog open={open} onClose={handleFormClose} aria-labelledby="edit-form">
-        <DialogTitle id="edit-form">Edit Data</DialogTitle>
+        <DialogTitle id="edit-form">Daftar Baru</DialogTitle>
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map((el) => (
             <Step key={el}>
