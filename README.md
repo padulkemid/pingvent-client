@@ -1,3 +1,3 @@
-# [rubixovt] pingvent
+# pingvent
 
 otw
